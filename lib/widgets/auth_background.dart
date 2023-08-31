@@ -23,7 +23,7 @@ class _HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: SizedBox(
         height: 200,
         width: double.infinity,

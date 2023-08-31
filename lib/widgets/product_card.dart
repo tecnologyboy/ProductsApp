@@ -147,14 +147,12 @@ class _BackGroundImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25),
       child: const SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: FadeInImage(
-          placeholder: AssetImage('assets/jar-loading.gif'),
-          image: NetworkImage('https://via.placeholder.com/400X300/F6F6F6'),
-          fit: BoxFit.cover,
-        ),
-      ),
+          width: double.infinity,
+          height: double.infinity,
+          child: FadeInImage(
+              placeholder: AssetImage('assets/jar-loading.gif'),
+              image:
+                  NetworkImage('https://via.placeholder.com/400X300/F6F6F6'))),
     );
   }
 }
