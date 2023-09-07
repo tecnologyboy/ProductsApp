@@ -5,6 +5,7 @@ class ProductModel {
   String name;
   String? picture;
   double price;
+  String? id;
 
   ProductModel({
     required this.available,
