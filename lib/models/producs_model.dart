@@ -7,12 +7,12 @@ class ProductModel {
   double price;
   String? id;
 
-  ProductModel({
-    required this.available,
-    required this.name,
-    this.picture,
-    required this.price,
-  });
+  ProductModel(
+      {required this.available,
+      required this.name,
+      this.picture,
+      required this.price,
+      this.id});
 
   factory ProductModel.fromRawJson(String str) =>
       ProductModel.fromJson(json.decode(str));
