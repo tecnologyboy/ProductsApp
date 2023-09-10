@@ -9,6 +9,8 @@ class ProductService extends ChangeNotifier {
 
   final List<ProductModel> productModelList = [];
 
+  late ProductModel selectedProduct;
+
   bool isLoading = true;
 
   ProductService() {

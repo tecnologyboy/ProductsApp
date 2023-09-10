@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 import 'dart:convert';
 
 class ProductModel {
@@ -32,4 +34,11 @@ class ProductModel {
         "picture": picture,
         "price": price,
       };
+
+  ProductModel copy() => ProductModel(
+      available: this.available,
+      name: this.name,
+      price: this.price,
+      picture: this.picture,
+      id: this.id);
 }

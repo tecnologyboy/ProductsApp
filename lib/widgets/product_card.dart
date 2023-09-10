@@ -24,12 +24,13 @@ class ProductCards extends StatelessWidget {
             _ProductDetail(id: productM.id, name: productM.name),
             Positioned(
                 top: 0, right: 0, child: _PriceTag(price: productM.price)),
-            Positioned(
-                top: 0,
-                left: 0,
-                child: _NotAvailable(
-                  available: productM.available,
-                ))
+            if (!productM.available)
+              Positioned(
+                  top: 0,
+                  left: 0,
+                  child: _NotAvailable(
+                    available: productM.available,
+                  ))
           ],
         ),
       ),
@@ -49,15 +50,15 @@ class ProductCards extends StatelessWidget {
 class _NotAvailable extends StatelessWidget {
   const _NotAvailable({
     super.key,
-    required this.available,
+    this.available,
   });
 
-  final bool available;
+  final bool? available;
 
   @override
   Widget build(BuildContext context) {
     String textAvailable =
-        available != null && available ? 'Available' : 'Not Available';
+        available != null && available! ? 'Available' : 'Not Available';
     return Container(
       width: 100,
       height: 70,
@@ -174,9 +175,11 @@ class _BackGroundImage extends StatelessWidget {
       child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: FadeInImage(
-              placeholder: const AssetImage('assets/jar-loading.gif'),
-              image: NetworkImage(url!))),
+          child: url == null
+              ? const Image(image: AssetImage('assets/no-image.png'))
+              : FadeInImage(
+                  placeholder: const AssetImage('assets/jar-loading.gif'),
+                  image: NetworkImage(url!))),
     );
   }
 }
