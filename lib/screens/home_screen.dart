@@ -28,8 +28,6 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 producServices.selectedProduct =
                     producServices.productModelList[index].copy();
-
-                print(producServices.selectedProduct.toJson());
                 Navigator.pushNamed(context, ProductScreen.routName);
               },
               child: ProductCards(
