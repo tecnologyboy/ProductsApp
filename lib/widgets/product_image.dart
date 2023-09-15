@@ -13,24 +13,27 @@ class ProductImage extends StatelessWidget {
           decoration: _productImageDecoration(),
           width: double.infinity,
           height: 450,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(45), topRight: Radius.circular(45)),
-            child: (url == null)
-                ? const Image(
-                    image: AssetImage('assets/no-image.png'),
-                    fit: BoxFit.cover,
-                  )
-                : FadeInImage(
-                    fit: BoxFit.cover,
-                    placeholder: const AssetImage('assets/jar-loading.gif'),
-                    image: NetworkImage(url!)),
+          child: Opacity(
+            opacity: .8,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(45), topRight: Radius.circular(45)),
+              child: (url == null)
+                  ? const Image(
+                      image: AssetImage('assets/no-image.png'),
+                      fit: BoxFit.cover,
+                    )
+                  : FadeInImage(
+                      fit: BoxFit.cover,
+                      placeholder: const AssetImage('assets/jar-loading.gif'),
+                      image: NetworkImage(url!)),
+            ),
           ),
         ));
   }
 
   BoxDecoration _productImageDecoration() => BoxDecoration(
-          //color: Colors.red,
+          color: Colors.black,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(45), topRight: Radius.circular(45)),
           boxShadow: [

@@ -146,9 +146,14 @@ class _ProductForm extends StatelessWidget {
               value: produc.available,
               title: const Text('Available'),
               activeColor: Colors.indigo,
-              onChanged: (value) {
-                //TODO Insert Ship here
-              },
+              // onChanged: (value) {
+              //   productForm.productAvailability(value);
+              // },
+              /*
+              Es valido pasar los metodos direct4amente, cuando la propiedad 
+              y el metodo tienen la misma cantidad de parametros.
+               */
+              onChanged: productForm.productAvailability,
             ),
             const SizedBox(
               height: 30,
