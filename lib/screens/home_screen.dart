@@ -5,6 +5,8 @@ import 'package:productos_app/screens/screens.dart';
 import 'package:productos_app/services/services.dart';
 import 'package:productos_app/widgets/widgets.dart';
 
+import '../models/models.dart';
+
 class HomeScreen extends StatelessWidget {
   static const String routeName = 'Login';
   const HomeScreen({
@@ -13,30 +15,36 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final producServices = Provider.of<ProductService>(context);
+    final productServices = Provider.of<ProductService>(context);
 
-    if (producServices.isLoading) return const LoadingScreen();
+    if (productServices.isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
       ),
       body: ListView.builder(
-        itemCount: producServices.productModelList.length,
+        itemCount: productServices.productModelList.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
-                producServices.selectedProduct =
-                    producServices.productModelList[index].copy();
+                productServices.selectedProduct =
+                    productServices.productModelList[index].copy();
                 Navigator.pushNamed(context, ProductScreen.routName);
               },
               child: ProductCards(
-                productM: producServices.productModelList[index],
+                productM: productServices.productModelList[index],
               ));
         },
       ),
-      floatingActionButton:
-          FloatingActionButton(child: const Icon(Icons.add), onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            productServices.selectedProduct =
+                ProductModel(available: false, name: '', price: 0);
+
+            Navigator.pushNamed(context, ProductScreen.routName);
+          }),
     );
   }
 }

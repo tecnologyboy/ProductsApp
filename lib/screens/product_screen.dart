@@ -34,6 +34,8 @@ class _ProductFormBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productForm = Provider.of<ProductFormProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -77,8 +79,10 @@ class _ProductFormBody extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save_outlined),
-        onPressed: () {
-          //TODO Insert Ship here, save
+        onPressed: () async {
+          productForm.isValidForm();
+
+          await productService.saveOrCreateProduct(productForm.product);
         },
       ),
     );
@@ -103,63 +107,66 @@ class _ProductForm extends StatelessWidget {
         width: double.infinity,
         decoration: _buildBoxDecoration(),
         child: Form(
+            key: productForm.formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              initialValue: produc.name,
-              onChanged: (value) => produc.name = value,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'El nombre es obligatorio';
-                }
-                return null;
-              },
-              decoration: InputDecorations.authInputdecoration(
-                  hintText: 'Product Name', labelText: 'Name:'),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              initialValue: '${produc.price}',
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^(\d+)?\.?\d{0,2}'))
-              ],
-              onChanged: (value) {
-                if (double.tryParse(value) == null) {
-                  produc.price = 0;
-                } else {
-                  produc.price = double.parse(value);
-                }
-              },
-              keyboardType: TextInputType.number,
-              decoration: InputDecorations.authInputdecoration(
-                  hintText: '\$150', labelText: 'Price:'),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SwitchListTile.adaptive(
-              value: produc.available,
-              title: const Text('Available'),
-              activeColor: Colors.indigo,
-              // onChanged: (value) {
-              //   productForm.productAvailability(value);
-              // },
-              /*
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  initialValue: produc.name,
+                  onChanged: (value) => produc.name = value,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'El nombre es obligatorio';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecorations.authInputdecoration(
+                      hintText: 'Product Name', labelText: 'Name:'),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  initialValue: '${produc.price}',
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^(\d+)?\.?\d{0,2}'))
+                  ],
+                  onChanged: (value) {
+                    if (double.tryParse(value) == null) {
+                      produc.price = 0;
+                    } else {
+                      produc.price = double.parse(value);
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecorations.authInputdecoration(
+                      hintText: '\$150', labelText: 'Price:'),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                SwitchListTile.adaptive(
+                  value: produc.available,
+                  title: const Text('Available'),
+                  activeColor: Colors.indigo,
+                  // onChanged: (value) {
+                  //   productForm.productAvailability(value);
+                  // },
+                  /*
               Es valido pasar los metodos direct4amente, cuando la propiedad 
               y el metodo tienen la misma cantidad de parametros.
                */
-              onChanged: productForm.productAvailability,
-            ),
-            const SizedBox(
-              height: 30,
-            )
-          ],
-        )),
+                  onChanged: productForm.productAvailability,
+                ),
+                const SizedBox(
+                  height: 30,
+                )
+              ],
+            )),
       ),
     );
   }
