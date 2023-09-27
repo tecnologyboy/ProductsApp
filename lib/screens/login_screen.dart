@@ -6,7 +6,7 @@ import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  static const String routeName = 'Home';
+  static const String routeName = 'login';
   const LoginScreen({
     super.key,
   });
@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 10),
                   Text(
-                    'Lgin',
+                    'Login',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 30),

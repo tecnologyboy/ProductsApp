@@ -8,7 +8,7 @@ import 'package:productos_app/widgets/widgets.dart';
 import '../models/models.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName = 'Login';
+  static const String routeName = 'home';
   const HomeScreen({
     super.key,
   });
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: const Text('Products!!!'),
       ),
       body: ListView.builder(
         itemCount: productServices.productModelList.length,
