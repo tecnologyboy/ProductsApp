@@ -66,13 +66,17 @@ class _ProductFormBody extends StatelessWidget {
                           final picker = ImagePicker();
                           final PickedFile? pickerfile;
 
-                          final image = await picker.pickImage(
-                              // source: ImageSource.gallery
-                              source: ImageSource.camera);
+                          final image =
+                              await picker.pickImage(source: ImageSource.gallery
+                                  //source: ImageSource.camera
+                                  );
 
                           if (image != null) {
                             pickerfile = PickedFile(image!.path);
-                            print('We have images ${image.path}');
+                            print('We have local images ${image.path}');
+
+                            productService
+                                .updateSelectedProductImage(pickerfile.path);
                           } else {
                             print('Don\'t select nothing');
                           }
@@ -96,6 +100,10 @@ class _ProductFormBody extends StatelessWidget {
         child: const Icon(Icons.save_outlined),
         onPressed: () async {
           productForm.isValidForm();
+
+          final String? imageUrl = await productService.uploadImage();
+
+          print(imageUrl);
 
           await productService.saveOrCreateProduct(productForm.product);
         },
