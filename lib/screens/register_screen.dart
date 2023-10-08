@@ -6,9 +6,9 @@ import 'package:productos_app/services/services.dart';
 import 'package:productos_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String routeName = 'login';
-  const LoginScreen({
+class RegisterScreen extends StatelessWidget {
+  static const String routeName = 'register';
+  const RegisterScreen({
     super.key,
   });
 
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 10),
                   Text(
-                    'Login',
+                    'Create Account',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 30),
@@ -42,12 +42,12 @@ class LoginScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () => Navigator.pushReplacementNamed(
-                    context, RegisterScreen.routeName),
+                    context, LoginScreen.routeName),
                 style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(
-                        Colors.indigo.withOpacity(0.9)),
+                        Colors.indigo.withOpacity(0.1)),
                     shape: MaterialStateProperty.all(const StadiumBorder())),
-                child: const Text('Create a new account',
+                child: const Text('Do you have an account?',
                     style: TextStyle(fontSize: 18, color: Colors.black87)),
               ),
               const SizedBox(
@@ -140,8 +140,8 @@ class _LoginForm extends StatelessWidget {
 
                         //TODO validar si el login es correcto
 
-                        final String? errorMessage = await authService.login(
-                            loginForm.email, loginForm.password);
+                        final String? errorMessage = await authService
+                            .createUser(loginForm.email, loginForm.password);
 
                         if (errorMessage == null) {
                           // ignore: use_build_context_synchronously

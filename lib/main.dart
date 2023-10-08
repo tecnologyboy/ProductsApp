@@ -13,9 +13,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => ProductService(),
-        )
+        ChangeNotifierProvider(create: (_) => ProductService()),
+        ChangeNotifierProvider(create: (_) => AuthService()),
       ],
       child: const MyApp(),
     );
@@ -38,11 +37,13 @@ class MyApp extends StatelessWidget {
             child: Text('Main'),
           ),
         ),
-        initialRoute: HomeScreen.routeName,
+        initialRoute: CheckAuthScreen.routeName,
         routes: {
-          LoginScreen.routeName: (_) => const LoginScreen(),
+          CheckAuthScreen.routeName: (_) => const CheckAuthScreen(),
           HomeScreen.routeName: (_) => const HomeScreen(),
-          ProductScreen.routName: (_) => const ProductScreen()
+          LoginScreen.routeName: (_) => const LoginScreen(),
+          ProductScreen.routName: (_) => const ProductScreen(),
+          RegisterScreen.routeName: (_) => const RegisterScreen(),
         },
         theme: ThemeData.light().copyWith(
             scaffoldBackgroundColor: Colors.grey[300],
